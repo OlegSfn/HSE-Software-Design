@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooManager", "ZooManager\ZooManager.csproj", "{EE833763-45A4-49A9-9FBC-211479F4E48A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooManagerTests", "ZooManagerTests\ZooManagerTests.csproj", "{8C9208AF-02D0-41C6-96F2-2A5747350F38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE833763-45A4-49A9-9FBC-211479F4E48A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE833763-45A4-49A9-9FBC-211479F4E48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE833763-45A4-49A9-9FBC-211479F4E48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE833763-45A4-49A9-9FBC-211479F4E48A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C9208AF-02D0-41C6-96F2-2A5747350F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C9208AF-02D0-41C6-96F2-2A5747350F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C9208AF-02D0-41C6-96F2-2A5747350F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C9208AF-02D0-41C6-96F2-2A5747350F38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
