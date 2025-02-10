@@ -21,11 +21,11 @@ internal static class Program
 
     static void FillZoo(Zoo zoo)
     {
-        var tiger = new Tiger("Vova", 10, 1, true);
-        var rabbit = new Rabbit("Aboba", 1, 2, true, 100);
-        var badRabbit = new Rabbit("Dr. Heinz Doofenshmirtz", 33, 3, true, -1000);
+        var tiger = new Tiger("Vova", 13, 1, true);
+        var rabbit = new Rabbit("Aboba", 1, 2, true, 7);
+        var badRabbit = new Rabbit("Dr. Heinz Doofenshmirtz", 33, 3, true, 0);
         var wolf = new Wolf("Pes", 5, 4, true);
-        var monkey = new Monkey("King Kong", 3, 5, true, 9999);
+        var monkey = new Monkey("King Kong", 3, 5, false, 10);
         
         zoo.AddAnimal(tiger);
         zoo.AddAnimal(rabbit);
