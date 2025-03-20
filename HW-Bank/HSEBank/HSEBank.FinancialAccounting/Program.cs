@@ -9,22 +9,24 @@ namespace HSEBank.FinancialAccounting
     {
         static void Main(string[] args)
         {
-            try
-            {
-                var serviceProvider = DependencyInjection.ConfigureServices();
+            while(true) {
+                try
+                {
+                    var serviceProvider = DependencyInjection.ConfigureServices();
 
-                var bankAccountFacade = serviceProvider.GetRequiredService<IBankAccountFacade>();
-                var categoryFacade = serviceProvider.GetRequiredService<ICategoryFacade>();
-                var operationFacade = serviceProvider.GetRequiredService<IOperationFacade>();
-                var analyticsFacade = serviceProvider.GetRequiredService<IAnalyticsFacade>();
+                    var bankAccountFacade = serviceProvider.GetRequiredService<IBankAccountFacade>();
+                    var categoryFacade = serviceProvider.GetRequiredService<ICategoryFacade>();
+                    var operationFacade = serviceProvider.GetRequiredService<IOperationFacade>();
+                    var analyticsFacade = serviceProvider.GetRequiredService<IAnalyticsFacade>();
 
-                var consoleUI = new ConsoleUI(bankAccountFacade, categoryFacade, operationFacade, analyticsFacade);
-                consoleUI.Run();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
+                    var consoleUI = new ConsoleUI(bankAccountFacade, categoryFacade, operationFacade, analyticsFacade);
+                    consoleUI.Run();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
             }
         }
     }
