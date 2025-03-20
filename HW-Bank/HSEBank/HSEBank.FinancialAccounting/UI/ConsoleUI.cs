@@ -51,17 +51,22 @@ public class ConsoleUI
 
         while (_isRunning)
         {
-            ShowMenu();
-            var choice = Console.ReadLine();
-            Console.WriteLine();
+            try {
+                ShowMenu();
+                var choice = Console.ReadLine();
+                Console.WriteLine();
 
-            if (_menuActions.TryGetValue(choice, out var action))
-            {
-                action();
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Please try again.");
+                if (_menuActions.TryGetValue(choice, out var action))
+                {
+                    action();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please try again.");
+                }
+            } catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
         }
     }
