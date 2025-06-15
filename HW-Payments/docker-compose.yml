@@ -1,0 +1,114 @@
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: APIGateway/Dockerfile
+    ports:
+      - "7001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - OrdersService__BaseUrl=http://orders-service
+      - PaymentsService__BaseUrl=http://payments-service
+    depends_on:
+      - orders-service
+      - payments-service
+    networks:
+      - microservices-network
+
+  orders-service:
+    build:
+      context: .
+      dockerfile: OrdersService/Dockerfile
+    ports:
+      - "7002:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__OrdersDb=Host=orders-db;Database=OrdersDb;Username=postgres;Password=Your_Password123;
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Username=guest
+      - RabbitMQ__Password=guest
+    depends_on:
+      - orders-db
+      - rabbitmq
+    networks:
+      - microservices-network
+    restart: on-failure
+
+  payments-service:
+    build:
+      context: .
+      dockerfile: PaymentsService/Dockerfile
+    ports:
+      - "7003:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PaymentsDb=Host=payments-db;Database=PaymentsDb;Username=postgres;Password=Your_Password123;
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Username=guest
+      - RabbitMQ__Password=guest
+    depends_on:
+      - payments-db
+      - rabbitmq
+    networks:
+      - microservices-network
+    restart: on-failure
+
+  orders-db:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=Your_Password123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=OrdersDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - orders-data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  payments-db:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=Your_Password123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=PaymentsDb
+    ports:
+      - "5433:5432"
+    volumes:
+      - payments-data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  microservices-network:
+    driver: bridge
+
+volumes:
+  orders-data:
+  payments-data:
+  rabbitmq-data:
